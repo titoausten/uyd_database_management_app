@@ -202,6 +202,12 @@ def enter_details(button_name):
 
 
 def call_to_action():
+    # Establish connection to spreads
+    conn = st.connection("gsheets", type=GSheetsConnection)
+
+    # Fetch current data
+    dataframe = conn.read(worksheet="Members", usecols=list(range(8)), ttl=45)
+    dataframe = dataframe.dropna(how="all")
     action = st.selectbox(
         "Choose an action",
         [
