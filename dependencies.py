@@ -11,20 +11,13 @@ import streamlit_authenticator as stauth
 
 st.set_page_config(page_title='uydiaspora', initial_sidebar_state='collapsed')
 
-
 # Establish connection to spreads
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 # Fetch current data
-dataframe = conn.read(worksheet="Members", usecols=list(range(8)), ttl=45)
+dataframe = conn.read(worksheet="Members", usecols=list(range(8)), ttl=5)
 dataframe = dataframe.dropna(how="all")
-'''
 
-# LOAD DATA
-data_path = './UYD_Membership_Data.csv'
-dataframe = pd.read_csv(data_path)
-dataframe = dataframe.dropna(how="all")
-'''
 # LOAD HASHED PASSWORD
 file_path = Path(__file__).parent / "hashed_pw.pkl"
 with file_path.open("rb") as file:
@@ -63,9 +56,9 @@ def insert_member(name, gender, date_of_birth, age, phone_number, email, locatio
                               'Email': email,
                               'Location': location}])
     data = pd.concat([dataframe, new_data], ignore_index=True)
-    # data.to_csv('./UYD_Membership_Data.csv', index=False)
     conn.update(worksheet=worksheet, data=data)
     st.success(f'Thank you {name} for filling this form.')
+    st.balloons()
 
 
 def update_member(name, gender, date_of_birth, age, phone_number, email, location, worksheet: str = WORKSHEET):
@@ -76,7 +69,6 @@ def update_member(name, gender, date_of_birth, age, phone_number, email, locatio
     dataframe.loc[dataframe['Name'] == name, 'Email'] = email
     dataframe.loc[dataframe['Name'] == name, 'Location'] = location
 
-    # dataframe.to_csv('./UYD_Membership_Data.csv', index=False)
     conn.update(worksheet=worksheet, data=dataframe)
     st.success('Information successfully updated')
 
@@ -119,15 +111,13 @@ def check(name, gender, date_of_birth, age, phone_number, email, location):
             st.stop()
     else:
         st.warning('Please enter your name rightly')
+        st.stop()
 
 
 def view_members():
-    # d_path = './UYD_Membership_Data.csv'
-    # d_frame = pd.read_csv(d_path)
-    # dataframe = conn.read(worksheet="Members", usecols=list(range(7)), ttl=45)
+    d_frame = conn.read(worksheet=WORKSHEET, usecols=list(range(8)), ttl=5)
     # Fetch current data
-    dataframe1 = conn.read(worksheet="Members", usecols=list(range(8)), ttl=45)
-    dataframe1 = dataframe1.dropna(how="all")
+    dataframe1 = d_frame.dropna(how="all")
     dataframe1 = dataframe1.drop(['Date of Birth', 'Phone Number', 'Email'], axis=1)
     st.dataframe(dataframe1)
 
@@ -152,6 +142,9 @@ def enter_details(button_name):
                 check(name, gender, date_of_birth, age, phone_number, email, location)
 
     elif button_name == "Update":
+        # Fetch current data
+        dataf = conn.read(worksheet=WORKSHEET, usecols=list(range(8)), ttl=5)
+        dataframe = dataf.dropna(how="all")
         member_to_update = st.selectbox(
             "Select Member",
             options=dataframe['Name'].tolist()
@@ -178,36 +171,10 @@ def enter_details(button_name):
 
             submit = st.form_submit_button(button_name)
             if submit:
-                # Removing old entry
-                dataframe.drop(
-                    dataframe[
-                        dataframe["Name"] == member_to_update
-                    ].index,
-                    inplace=True,
-                )
-                member_id = len(dataframe['Member ID'].values) + 1
-                new_data = pd.DataFrame([{'Member ID': member_id,
-                                          'Name': name,
-                                          'Gender': gender,
-                                          'Date of Birth': date_of_birth,
-                                          'Age': age,
-                                          'Phone Number': phone_number,
-                                          'Email': email,
-                                          'Location': location}])
-                data = pd.concat([dataframe, new_data], ignore_index=True)
-                # data.to_csv('./UYD_Membership_Data.csv', index=False)
-                conn.update(worksheet=WORKSHEET, data=data)
-                st.success('Information successfully updated')
-                # update_member(name, gender, date_of_birth, age, phone_number, email, location)
+                update_member(name, gender, date_of_birth, age, phone_number, email, location)
 
 
 def call_to_action():
-    # Establish connection to spreads
-    conn = st.connection("gsheets", type=GSheetsConnection)
-
-    # Fetch current data
-    dataframe = conn.read(worksheet="Members", usecols=list(range(8)), ttl=45)
-    dataframe = dataframe.dropna(how="all")
     action = st.selectbox(
         "Choose an action",
         [
