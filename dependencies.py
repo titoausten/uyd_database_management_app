@@ -153,14 +153,11 @@ def enter_details(button_name):
                 check(name, gender, date_of_birth, age, phone_number, email, location)
 
     elif button_name == "Update":
-        # Fetch current data
-        dataf = conn.read(worksheet="Members", usecols=list(range(8)), ttl=45)
-        dataf = dataf.dropna(how="all")
         member_to_update = st.selectbox(
             "Select Member",
-            options=dataf['Name'].tolist()
+            options=dataframe['Name'].tolist()
         )
-        member_data = dataf[dataf['Name'] == member_to_update].iloc[0]
+        member_data = dataframe[dataframe['Name'] == member_to_update].iloc[0]
         with ((st.form(key='update', clear_on_submit=True))):
             name = st.text_input(':blue[Full Name]',
                                  placeholder="Enter First Name and Last Name",
