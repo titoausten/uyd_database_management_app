@@ -66,7 +66,6 @@ def insert_member(name, gender, date_of_birth, age, phone_number, email, locatio
     # data.to_csv('./UYD_Membership_Data.csv', index=False)
     conn.update(worksheet=worksheet, data=data)
     st.success(f'Thank you {name} for filling this form.')
-    st.balloons()
 
 
 def update_member(name, gender, date_of_birth, age, phone_number, email, location, worksheet: str = WORKSHEET):
@@ -179,7 +178,27 @@ def enter_details(button_name):
 
             submit = st.form_submit_button(button_name)
             if submit:
-                update_member(name, gender, date_of_birth, age, phone_number, email, location)
+                # Removing old entry
+                dataframe.drop(
+                    dataframe[
+                        dataframe["Name"] == member_to_update
+                    ].index,
+                    inplace=True,
+                )
+                member_id = len(dataframe['Member ID'].values) + 1
+                new_data = pd.DataFrame([{'Member ID': member_id,
+                                          'Name': name,
+                                          'Gender': gender,
+                                          'Date of Birth': date_of_birth,
+                                          'Age': age,
+                                          'Phone Number': phone_number,
+                                          'Email': email,
+                                          'Location': location}])
+                data = pd.concat([dataframe, new_data], ignore_index=True)
+                # data.to_csv('./UYD_Membership_Data.csv', index=False)
+                conn.update(worksheet=worksheet, data=data)
+                st.success('Information successfully updated')
+                # update_member(name, gender, date_of_birth, age, phone_number, email, location)
 
 
 def call_to_action():
