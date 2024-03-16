@@ -1,0 +1,9 @@
+credentials:
+  usernames:
+    uyd2023:
+      name: Uy Diaspora
+      password:
+cookie:
+  expiry_days: 30
+  key: "uydyouth"
+  name: uyddatabase
