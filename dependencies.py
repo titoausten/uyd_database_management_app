@@ -52,7 +52,7 @@ def insert_member(name, gender, date_of_birth, age, phone_number, email, locatio
                               'Gender': gender,
                               'Date of Birth': date_of_birth,
                               'Age': age,
-                              'Phone Number': phone_number,
+                              'Phone Number': str(phone_number),
                               'Email': email,
                               'Location': location}])
     data = pd.concat([dataframe, new_data], ignore_index=True)
@@ -65,7 +65,7 @@ def update_member(name, gender, date_of_birth, age, phone_number, email, locatio
     dataframe.loc[dataframe['Name'] == name, 'Gender'] = gender
     dataframe.loc[dataframe['Name'] == name, 'Date of Birth'] = date_of_birth
     dataframe.loc[dataframe['Name'] == name, 'Age'] = age
-    dataframe.loc[dataframe['Name'] == name, 'Phone Number'] = phone_number
+    dataframe.loc[dataframe['Name'] == name, 'Phone Number'] = str(phone_number)
     dataframe.loc[dataframe['Name'] == name, 'Email'] = email
     dataframe.loc[dataframe['Name'] == name, 'Location'] = location
 
