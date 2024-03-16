@@ -62,6 +62,8 @@ def insert_member(name, gender, date_of_birth, age, phone_number, email, locatio
 
 
 def update_member(name, gender, date_of_birth, age, phone_number, email, location, worksheet: str = WORKSHEET):
+    member_id = dataframe[dataframe['Name'] == name, 'Member ID']
+    dataframe.loc[dataframe['Name'] == name, 'Member ID'] = member_id
     dataframe.loc[dataframe['Name'] == name, 'Gender'] = gender
     dataframe.loc[dataframe['Name'] == name, 'Date of Birth'] = date_of_birth
     dataframe.loc[dataframe['Name'] == name, 'Age'] = age
