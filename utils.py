@@ -215,7 +215,7 @@ def call_to_action():
             password = st.text_input('Enter Password', type="password")
             submit = st.button('Enter')
             if submit:
-                st.write(password)
+                st.write(hashed_password[1])
                 if password == hashed_password[1]:
                     enter_details("Delete")
                 else:
