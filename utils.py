@@ -162,8 +162,9 @@ def enter_details(button_name: str):
         member_to_delete = st.selectbox(
             "Select a Member to Delete", options=dataframe["Name"].tolist()
         )
-
-        if st.button("Delete"):
+        
+        submit = st.form_submit_button(button_name)
+        if submit:
             dataframe.drop(
                 dataframe[dataframe["Name"] == member_to_delete].index,
                 inplace=True,
@@ -215,6 +216,6 @@ def call_to_action():
             if password == hashed_password[1]:
                 enter_details("Delete")
             else:
-                st.error('Wrong Executives password')
+                st.warning('Wrong Executives password')
         elif action == "No":
             st.warning('You are not allowed to delete member details')
