@@ -162,8 +162,8 @@ def enter_details(button_name: str):
         member_to_delete = st.selectbox(
             "Select a Member to Delete", options=dataframe["Name"].tolist()
         )
-        
-        if st.button(button_name):
+        submit = st.button(button_name, key='delete_key')
+        if submit:
             dataframe.drop(
                 dataframe[dataframe["Name"] == member_to_delete].index,
                 inplace=True,
