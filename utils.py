@@ -194,6 +194,8 @@ def call_to_action():
 
     # View All Vendors
     elif action == "View All Members":
+        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=5)
+        dataframe = dataframe.dropna(how="all")
         st.dataframe(dataframe)
 
     # Delete Member
