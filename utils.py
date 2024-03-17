@@ -213,6 +213,7 @@ def call_to_action():
             st.markdown("Enter Executives Password")
             password = st.text_input('Enter Password', type="password")
             password = stauth.Hasher([password]).generate()
+            st.write(password)
             submit = st.button('Enter')
             if submit:
                 st.write(hashed_password)
