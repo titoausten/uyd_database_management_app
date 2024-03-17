@@ -213,9 +213,11 @@ def call_to_action():
         if action == "Yes":
             st.markdown("Enter Executives Password")
             password = st.text_input('Enter Password', type="password")
-            if password == hashed_password[1]:
-                enter_details("Delete")
-            else:
-                st.warning('Wrong Executives password')
+            submit = st.button('Enter')
+            if submit:
+                if password == hashed_password[1]:
+                    enter_details("Delete")
+                else:
+                    st.warning('Wrong Executives password')
         elif action == "No":
             st.warning('You are not allowed to delete member details')
