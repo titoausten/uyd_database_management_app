@@ -116,9 +116,7 @@ def enter_details(button_name: str):
         member_to_update = st.selectbox(
             "Select a Member to Update", options=dataframe["Name"].tolist()
         )
-        member_data = dataframe[dataframe["Name"] == member_to_update].iloc[
-            0
-        ]
+        member_data = dataframe[dataframe["Name"] == member_to_update].iloc[0]
         with st.form(key="update", clear_on_submit=True):
             name = st.text_input(
                 label="Full Name", value=member_data["Name"]
@@ -190,8 +188,6 @@ def call_to_action():
         enter_details("Submit")
 
     elif action == "Update Existing Member Details":
-        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=5)
-        dataframe = dataframe.dropna(how="all")
         st.markdown("Select a member and update their details.")
         enter_details("Update")
 
