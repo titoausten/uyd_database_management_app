@@ -1,4 +1,4 @@
-from dependencies import *
+from utils import *
 
 # set_background('./nba_rookie1.jpg')
 
