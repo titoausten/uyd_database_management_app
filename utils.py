@@ -178,7 +178,6 @@ def call_to_action():
             "Enter Member Details",
             "Update Existing Member Details",
             "View All Members",
-            "Delete Member Details",
         ],
         index=None
     )
