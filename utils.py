@@ -116,7 +116,7 @@ def enter_details(button_name: str):
         member_to_update = st.selectbox(
             "Select a Member to Update", options=dataframe["Name"].tolist()
         )
-        member_data = dataframe[dataframe["CompanyName"] == member_to_update].iloc[
+        member_data = dataframe[dataframe["Name"] == member_to_update].iloc[
             0
         ]
         with st.form(key="update", clear_on_submit=True):
