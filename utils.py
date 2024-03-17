@@ -163,7 +163,7 @@ def enter_details(button_name: str):
             "Select a Member to Delete", options=dataframe["Name"].tolist()
         )
         
-        submit = st.form_submit_button(button_name)
+        submit = st.button(button_name)
         if submit:
             dataframe.drop(
                 dataframe[dataframe["Name"] == member_to_delete].index,
