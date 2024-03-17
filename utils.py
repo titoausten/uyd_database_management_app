@@ -68,8 +68,8 @@ def check(name, gender, date_of_birth, age, phone_number, email, location):
                                                                   'Email': email,
                                                                   'Location': location}])
                                         data = pd.concat([dataframe, new_data], ignore_index=True)
-                                        data.to_csv('./UYD_Membership_Data.csv', index=False)
-                                        # conn.update(worksheet=worksheet, data=data)
+                                        # data.to_csv('./UYD_Membership_Data.csv', index=False)
+                                        conn.update(worksheet=WORKSHEET, data=data)
                                         st.success(f'Thank you {name} for filling this form.')
                                         st.balloons()
                                     else:
