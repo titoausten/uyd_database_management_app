@@ -102,7 +102,6 @@ def enter_details(button_name: str):
             gender = st.selectbox(':blue[Gender]', ['Male', 'Female'], index=None, placeholder="Choose an option")
             date_of_birth = st.date_input(':blue[Date of Birth]', min_value=datetime.date(day=1, month=1, year=1965))
             phone_number = st.text_input(':blue[Phone Number with Country code]')
-            phone_number = str(phone_number)
             email = st.text_input(':blue[Email Address]')
             location = st.text_input(':blue[Location]', placeholder="Enter City, Country")
             currentDate = datetime.datetime.today()
@@ -131,7 +130,6 @@ def enter_details(button_name: str):
                                           value=pd.to_datetime(member_data['Date of Birth']))
             phone_number = st.text_input(':blue[Phone Number with Country code]',
                                          value=member_data['Phone Number'])
-            phone_number = str(phone_number)
             email = st.text_input(':blue[Email Address]', value=member_data['Email'])
             location = st.text_input(':blue[Location]', placeholder="Enter City, Country",
                                      value=member_data['Location'])
