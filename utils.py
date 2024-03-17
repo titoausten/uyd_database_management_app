@@ -196,6 +196,7 @@ def call_to_action():
     elif action == "View All Members":
         dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=5)
         dataframe = dataframe.dropna(how="all")
+        dataframe = dataframe.drop(['Date of Birth', 'Phone Number', 'Email'], axis=1)
         st.dataframe(dataframe)
 
     # Delete Member
