@@ -117,7 +117,7 @@ def enter_details(button_name: str):
             "Select a Member to Update", options=dataframe["Name"].tolist()
         )
         member_data = dataframe[dataframe["Name"] == member_to_update].iloc[0]
-        with st.form(key="update", clear_on_submit=True):
+        with st.form(key="update"):
             name = st.text_input(
                 label="Full Name", value=member_data["Name"]
             )
