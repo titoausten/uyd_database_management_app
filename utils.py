@@ -17,7 +17,7 @@ WORKSHEET = 'Members'
 conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 
 # Fetch current data
-dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(8)), ttl=5)
+dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=5)
 dataframe = dataframe.dropna(how="all")
 
 # LOAD HASHED PASSWORD
