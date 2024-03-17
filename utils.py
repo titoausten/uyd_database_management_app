@@ -187,8 +187,6 @@ def call_to_action():
 
     elif action == "Update Existing Member Details":
         st.markdown("Select a member and update their details.")
-        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=5)
-        dataframe = dataframe.dropna(how="all")
         enter_details("Update")
 
     # View All Vendors
