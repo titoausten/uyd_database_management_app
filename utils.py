@@ -17,7 +17,7 @@ WORKSHEET = 'Members'
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 # Fetch current data
-dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=5)
+dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=600)
 dataframe = dataframe.dropna(how="all")
 
 # LOAD HASHED PASSWORD
@@ -191,7 +191,7 @@ def call_to_action():
 
     # View All Vendors
     elif action == "View All Members":
-        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=5)
+        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=600)
         dataframe = dataframe.dropna(how="all")
         dataframe = dataframe.drop(['Date of Birth', 'Phone Number', 'Email'], axis=1)
         st.dataframe(dataframe)
