@@ -182,10 +182,14 @@ def call_to_action():
     )
 
     if action == "Enter Member Details":
+        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=5)
+        dataframe = dataframe.dropna(how="all")
         st.markdown("Enter details")
         enter_details("Submit")
 
     elif action == "Update Existing Member Details":
+        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=5)
+        dataframe = dataframe.dropna(how="all")
         st.markdown("Select a member and update their details.")
         enter_details("Update")
 
