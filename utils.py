@@ -14,7 +14,7 @@ GENDER = ['Male', 'Female']
 WORKSHEET = 'Members'
 
 # Establishing a Google Sheets connection
-conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+conn = st.connection("gsheets", type=GSheetsConnection)
 
 # Fetch current data
 dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=5)
@@ -182,8 +182,6 @@ def call_to_action():
     )
 
     if action == "Enter Member Details":
-        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=5)
-        dataframe = dataframe.dropna(how="all")
         st.markdown("Enter details")
         enter_details("Submit")
 
