@@ -1,7 +1,10 @@
 credentials:
   usernames:
     uyd2023:
-      name: Uy Diaspora
+      name: Uy Diaspora Member
+      password:
+    uyd2023admin:
+      name: Uy Diaspora Admin
       password:
 cookie:
   expiry_days: 30
