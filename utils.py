@@ -154,7 +154,7 @@ def enter_details(button_name: str):
                 data = pd.concat([dataframe, new_data], ignore_index=True)
                 conn.update(worksheet=WORKSHEET, data=data)
                 st.success('Information successfully updated')
-    '''
+    
     elif button_name == 'Delete':
         member_to_delete = st.selectbox(
             "Select a Member to Delete", options=dataframe["Name"].tolist()
@@ -167,58 +167,61 @@ def enter_details(button_name: str):
             )
             conn.update(worksheet=WORKSHEET, data=dataframe)
             st.success("Member successfully deleted!")
-    '''
+    
 
 
-def call_to_action():
-    action = st.selectbox(
-        "Choose an Action",
-        [
-            "Enter Member Details",
-            "Update Existing Member Details",
-            "View All Members",
-        ],
-        index=None
-    )
-
-    if action == "Enter Member Details":
-        st.markdown("Enter details")
-        enter_details("Submit")
-
-    elif action == "Update Existing Member Details":
-        st.markdown("Select a member and update their details.")
-        enter_details("Update")
-
-    # View All Vendors
-    elif action == "View All Members":
-        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
-        dataframe = dataframe.dropna(how="all")
-        dataframe = dataframe.drop(['Date of Birth', 'Phone Number', 'Email'], axis=1)
-        st.dataframe(dataframe)
-    '''
-    # Delete Member
-    elif action == "Delete Member Details":
+def call_to_action(member_type: str):
+    if member_type == "admin":
         action = st.selectbox(
-            "Are you an Executive?",
+            "Choose an Action",
             [
-                "Yes",
-                "No",
+                "Enter Member Details",
+                "Update Existing Member Details",
+                "View All Members",
+                "Delete Member Details",
             ],
             index=None
         )
-        if action == "Yes":
-            st.markdown("Enter Executives Password")
-            password = st.text_input('Enter Password', type="password")
-            # password = stauth.Hasher([password]).generate()
-            # st.write(password)
-            submit = st.button('Enter')
-            if submit:
-                # st.write(hashed_password)
-                if password == hashed_password[1]:
-                    enter_details("Delete")
-                else:
-                    st.warning('Wrong Executives password')
-        elif action == "No":
-            st.warning('You are not allowed to delete member details')
-        '''
-    
+
+        if action == "Enter Member Details":
+            st.markdown("Enter details")
+            enter_details("Submit")
+
+        elif action == "Update Existing Member Details":
+            st.markdown("Select a member and update their details.")
+            enter_details("Update")
+
+        elif action == "View All Members":
+        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
+        dataframe = dataframe.dropna(how="all")
+        st.dataframe(dataframe)
+
+        elif action == "Delete Member Details":
+            st.markdown("Select member details to delete.")
+            enter_details("Delete")
+
+    elif member_type == 'member':
+        action = st.selectbox(
+            "Choose an Action",
+            [
+                "Enter Member Details",
+                "Update Existing Member Details",
+                "View All Members",
+            ],
+            index=None
+        )
+
+        if action == "Enter Member Details":
+            st.markdown("Enter details")
+            enter_details("Submit")
+
+        elif action == "Update Existing Member Details":
+            st.markdown("Contact the General Secretary to update member details.")
+
+    # View All Vendors
+        elif action == "View All Members":
+            dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
+            dataframe = dataframe.dropna(how="all")
+            dataframe = dataframe.drop(['Date of Birth', 'Age', 'Phone Number', 'Email'], axis=1)
+            st.dataframe(dataframe)
+        
