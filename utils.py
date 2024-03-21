@@ -184,11 +184,9 @@ def call_to_action(member_type: str):
         )
 
         if action == "Enter Member Details":
-            st.markdown("Enter details")
             enter_details("Submit")
 
         elif action == "Update Existing Member Details":
-            st.markdown("Select a member and update their details.")
             enter_details("Update")
 
         elif action == "View All Members":
@@ -197,7 +195,6 @@ def call_to_action(member_type: str):
             st.dataframe(dataframe)
 
         elif action == "Delete Member Details":
-            st.markdown("Select member details to delete.")
             enter_details("Delete")
 
     elif member_type == 'member':
@@ -212,7 +209,6 @@ def call_to_action(member_type: str):
         )
 
         if action == "Enter Member Details":
-            st.markdown("Enter details")
             enter_details("Submit")
 
         elif action == "Update Existing Member Details":
