@@ -23,7 +23,7 @@ def main():
             st.sidebar.title('Welcome Admin!')
             st.title(':green[UMUEHEA YOUTHS IN DIASPORA]')
             call_to_action("admin")
-        elif username == 'uyd2023admin':
+        elif username == 'uyd2023':
             st.sidebar.title('Welcome!')
             st.title(':green[UMUEHEA YOUTHS IN DIASPORA]')
             call_to_action("member")
