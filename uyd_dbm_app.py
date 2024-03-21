@@ -16,7 +16,6 @@ def main():
                                                                         'Username': 'Username',
                                                                         'Password': 'Password',
                                                                         'Login': 'Login'})
-    st.write(f'{name} has this username: {username}')
     if authentication_status:
         authenticator.logout('Logout', 'sidebar')
         if username == 'uyd2023admin':
