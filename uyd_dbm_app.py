@@ -18,13 +18,13 @@ def main():
                                                                         'Login': 'Login'})
 
     if authentication_status:
+        authenticator.logout('Logout', 'sidebar')
         if username == 'uyd2023admin':
             authenticator.logout('Logout', 'sidebar')
             st.sidebar.title('Welcome Admin!')
             st.title(':green[UMUEHEA YOUTHS IN DIASPORA]')
             call_to_action("admin")
         elif username == 'uyd2023admin':
-            authenticator.logout('Logout', 'sidebar')
             st.sidebar.title('Welcome!')
             st.title(':green[UMUEHEA YOUTHS IN DIASPORA]')
             call_to_action("member")
