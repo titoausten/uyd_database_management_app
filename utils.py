@@ -192,9 +192,9 @@ def call_to_action(member_type: str):
             enter_details("Update")
 
         elif action == "View All Members":
-        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
-        dataframe = dataframe.dropna(how="all")
-        st.dataframe(dataframe)
+            dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
+            dataframe = dataframe.dropna(how="all")
+            st.dataframe(dataframe)
 
         elif action == "Delete Member Details":
             st.markdown("Select member details to delete.")
