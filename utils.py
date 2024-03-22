@@ -198,6 +198,7 @@ def call_to_action(member_type: str):
         elif action == "View All Members":
             dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
             dataframe = dataframe.dropna(how="all")
+            dataframe['Phone Number'].values = dataframe['Phone Number'].astype(str).apply(lambda x: '+' + x)
             st.dataframe(dataframe)
 
         elif action == "Delete Member Details":
