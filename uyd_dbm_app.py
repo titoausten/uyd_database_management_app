@@ -11,7 +11,7 @@ def main():
                                       key=config['cookie']['key'],
                                       cookie_expiry_days=config['cookie']['expiry_days'])
 
-    name, authentication_status, username = authenticator.login("main", max_concurrent_users=20,
+    name, authentication_status, username = authenticator.login("main",
                                                                 fields={'Form name': 'Login',
                                                                         'Username': 'Username',
                                                                         'Password': 'Password',
