@@ -1,4 +1,4 @@
-import pandas as pd
+weimport pandas as pd
 import streamlit as st
 import datetime
 from streamlit_gsheets import GSheetsConnection
@@ -160,8 +160,6 @@ def enter_details(button_name: str):
                 st.success('Information successfully updated')
     
     elif button_name == 'Delete':
-        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
-        dataframe = dataframe.dropna(how="all")
         member_to_delete = st.selectbox(
             "Select a Member to Delete", options=dataframe["Name"].tolist()
         )
