@@ -95,6 +95,8 @@ def check(name, gender, date_of_birth, age, phone_number, email, location):
 
 def enter_details(button_name: str):
     if button_name == 'Submit':
+        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
+        dataframe = dataframe.dropna(how="all")
         with st.form(key='member_form', clear_on_submit=True):
             # with st.form(key="vendor_form"):
             name = st.text_input(':blue[Full Name]', placeholder="Enter First Name and Last Name")
@@ -112,6 +114,8 @@ def enter_details(button_name: str):
                 check(name, gender, date_of_birth, age, phone_number, email, location)
 
     elif button_name == 'Update':
+        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
+        dataframe = dataframe.dropna(how="all")
         member_to_update = st.selectbox(
             "Select a Member to Update", options=dataframe["Name"].tolist()
         )
@@ -156,6 +160,8 @@ def enter_details(button_name: str):
                 st.success('Information successfully updated')
     
     elif button_name == 'Delete':
+        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
+        dataframe = dataframe.dropna(how="all")
         member_to_delete = st.selectbox(
             "Select a Member to Delete", options=dataframe["Name"].tolist()
         )
