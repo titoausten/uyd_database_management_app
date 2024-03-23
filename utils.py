@@ -17,7 +17,7 @@ WORKSHEET = 'Members'
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 # Fetch current data
-dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
+dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl="10m")
 dataframe = dataframe.dropna(how="all")
 
 # LOAD HASHED PASSWORD
@@ -95,7 +95,7 @@ def check(name, gender, date_of_birth, age, phone_number, email, location):
 
 def enter_details(button_name: str):
     if button_name == 'Submit':
-        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
+        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl="10m")
         dataframe = dataframe.dropna(how="all")
         with st.form(key='member_form', clear_on_submit=True):
             # with st.form(key="vendor_form"):
@@ -114,7 +114,7 @@ def enter_details(button_name: str):
                 check(name, gender, date_of_birth, age, phone_number, email, location)
 
     elif button_name == 'Update':
-        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
+        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl="10m")
         dataframe = dataframe.dropna(how="all")
         member_to_update = st.selectbox(
             "Select a Member to Update", options=dataframe["Name"].tolist()
@@ -160,7 +160,7 @@ def enter_details(button_name: str):
                 st.success('Information successfully updated')
     
     elif button_name == 'Delete':
-        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
+        dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl="5m")
         dataframe = dataframe.dropna(how="all")
         member_to_delete = st.selectbox(
             "Select a Member to Delete", options=dataframe["Name"].tolist()
@@ -196,7 +196,7 @@ def call_to_action(member_type: str):
             enter_details("Update")
 
         elif action == "View All Members":
-            dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl=10)
+            dataframe = conn.read(worksheet=WORKSHEET, usecols=list(range(7)), ttl="5m")
             dataframe = dataframe.dropna(how="all")
             dataframe['Phone Number'] = dataframe['Phone Number'].astype(str).apply(lambda x: '+' + x)
             st.dataframe(dataframe)
