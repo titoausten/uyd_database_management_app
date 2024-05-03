@@ -9,7 +9,7 @@ config['credentials']['usernames']['uyd2023admin']['password'] = hashed_password
 
 def main():
     authenticator = stauth.Authenticate(config['credentials'], cookie_name=config['cookie']['name'],
-                                      key=config['cookie']['key'],
+                                      cookie_key=config['cookie']['key'],
                                       cookie_expiry_days=config['cookie']['expiry_days'])
 
     name, authentication_status, username = authenticator.login("main",
