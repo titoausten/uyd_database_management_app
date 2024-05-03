@@ -1,4 +1,5 @@
 from utils import *
+import streamlit_authenticator as stauth
 
 # set_background('./nba_rookie1.jpg')
 
@@ -7,7 +8,7 @@ config['credentials']['usernames']['uyd2023admin']['password'] = hashed_password
 
 
 def main():
-    authenticator = FixedAuthenticate(config['credentials'], cookie_name=config['cookie']['name'],
+    authenticator = stauth.Authenticate(config['credentials'], cookie_name=config['cookie']['name'],
                                       key=config['cookie']['key'],
                                       cookie_expiry_days=config['cookie']['expiry_days'])
 
