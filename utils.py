@@ -29,7 +29,7 @@ with file_path.open("rb") as file:
 with open('./config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
-
+'''
 class FixedAuthenticate(stauth.Authenticate):
     def _implement_logout(self):
         try:
@@ -42,7 +42,7 @@ class FixedAuthenticate(stauth.Authenticate):
         st.session_state['username'] = None
         st.session_state['authentication_status'] = None
 
-
+'''
 def get_member_names():
     names = dataframe['Name'].values
     return names
