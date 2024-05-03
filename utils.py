@@ -9,6 +9,8 @@ from yaml.loader import SafeLoader
 # import streamlit_authenticator as stauth
 
 
+st.set_page_config(page_title='uydiaspora', initial_sidebar_state='collapsed')
+
 # CONSTANTS
 GENDER = ['Male', 'Female']
 WORKSHEET = 'Members'
@@ -219,7 +221,7 @@ def call_to_action(member_type: str):
             enter_details("Submit")
 
         elif action == "Update Existing Member Details":
-            st.markdown("Contact the General Secretary to update member details.")
+            st.markdown("Contact the Vice President or General Secretary to update member details.")
 
     # View All Vendors
         elif action == "View All Members":
